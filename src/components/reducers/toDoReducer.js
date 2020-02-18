@@ -26,10 +26,6 @@
             return state.concat(action.payload)
                 // ...state, 
                 // myList: [...state.myList, {item: action.payload, completed: false}]
-              
-
-            
-
             default: 
             return state
     

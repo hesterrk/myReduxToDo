@@ -1,14 +1,30 @@
 import React from 'react';
+import { formAction } from './actions/formAction';
 import { toDoAction } from './actions/toDoAction';
+
 import { connect } from 'react-redux'
 
 
 
 function ToDoForm(props) {
 
+const onSubmit = e => {
+    e.preventDefault();
+    props.toDoAction({
+        newTask: props.inputPropValues  
+    })
 
+}
 
+const onChange = e => {
+    props.formAction({
+        inputName: e.target.name,
+        inputValue: e.target.value
 
+    })
+}
+
+// console.log(props)
 
     return (
 
@@ -26,24 +42,20 @@ function ToDoForm(props) {
 
 
 
-{/* <form onSubmit={}>
+<form onSubmit={onSubmit}>
 <input
  type="text"
  name="newTask"
- value={}
- onChange={}
+//  value={}
+ onChange={onChange}
  />
 
-</form> */}
+</form> 
+
 <button>Add Task </button>
 
-
-
 <br></br>
 <br></br>
-
-
-
 
         </div>
     )
@@ -51,11 +63,13 @@ function ToDoForm(props) {
 
 const mapStateToProps = state => {
     return {
-        todoProps: state.toDoReducer.myList
+        todoProps: state.toDoReducer.myList,
+        //add form reducer here 
+        inputPropValues: state.formReducer.newTask
     };
 };
 
 export default connect(
     mapStateToProps,
-    { toDoAction }
+    { toDoAction, formAction }
     )(ToDoForm);
