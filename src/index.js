@@ -6,11 +6,10 @@ import App from './App';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import { toDoReducer } from "./components/reducers/toDoReducer";
-
+import rootReducer from './components/reducers';
 
 //import AND pass in big reducer into here 
-const store = createStore(toDoReducer);
+const store = createStore(rootReducer);
 
 
 const rootElement = document.getElementById('root');
