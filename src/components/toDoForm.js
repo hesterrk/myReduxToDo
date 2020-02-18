@@ -1,20 +1,24 @@
-import React from 'react';
-import { formAction } from './actions/formAction';
-import { toDoAction } from './actions/toDoAction';
+import React, { useState } from 'react';
+import { formAction, toDoAction } from './actions/actionCreators';
 
 import { connect } from 'react-redux'
 
 
-
 function ToDoForm(props) {
+
+    // const [newText, setNewText] = useState('')
+
 
 const onSubmit = e => {
     e.preventDefault();
     props.toDoAction({
-        newTask: props.inputPropValues  
-    })
+        item: props.inputPropValues.newTask,
+       
+     } )
 
 }
+
+
 
 const onChange = e => {
     props.formAction({
@@ -24,17 +28,16 @@ const onChange = e => {
     })
 }
 
-// console.log(props)
-
     return (
 
 <div>
+    <h3>Tasks:</h3>
 {props.todoProps.map(items=> (
     <div>
     {items.item}
     <br>
     </br>
-    {items.id}
+
    </div>
    
 ))}
@@ -42,17 +45,20 @@ const onChange = e => {
 
 
 
-<form onSubmit={onSubmit}>
+<form onSubmit={onSubmit} >
 <input
  type="text"
- name="newTask"
-//  value={}
+ value={props.inputPropValues.newTask}
  onChange={onChange}
+ name="newTask"
+
  />
+
+<button type="submit">Add Task </button>
+
 
 </form> 
 
-<button>Add Task </button>
 
 <br></br>
 <br></br>
@@ -65,7 +71,7 @@ const mapStateToProps = state => {
     return {
         todoProps: state.toDoReducer.myList,
         //add form reducer here 
-        inputPropValues: state.formReducer.newTask
+        inputPropValues: state.formReducer
     };
 };
 

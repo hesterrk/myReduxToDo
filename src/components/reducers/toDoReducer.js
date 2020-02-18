@@ -1,4 +1,5 @@
 
+import * as types from '../actions/actionTypes';
 
  const initialState = {
   
@@ -17,15 +18,18 @@
    }
  ]
  
-  
   }
 
   export const toDoReducer = (state = initialState, action) => {
     switch(action.type) {
-        case 'ADD_ITEM' :
-            return state.concat(action.payload)
-                // ...state, 
-                // myList: [...state.myList, {item: action.payload, completed: false}]
+        case types.ADD_NAME :
+            return {
+              //  ...state,
+              //   myList: [...state.myList, {item: action.payload}]
+              ...state,
+                myList: [...state.myList, action.payload]
+              
+            };
             default: 
             return state
     
@@ -33,3 +37,6 @@
 
 
   }
+
+
+
