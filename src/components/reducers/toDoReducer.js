@@ -20,16 +20,40 @@ import * as types from '../actions/actionTypes';
  
   }
 
+  
   export const toDoReducer = (state = initialState, action) => {
     switch(action.type) {
         case types.ADD_NAME :
             return {
-              //  ...state,
-              //   myList: [...state.myList, {item: action.payload}]
-              ...state,
+             
+               ...state,
                 myList: [...state.myList, action.payload]
               
             };
+
+            case types.MARK_COMPLETED : 
+    
+            return {
+              ...state, 
+              myList: state.myList.map(item => {
+                if(item.id === action.payload) {
+                  return {
+                    ...item,
+                    completed: !item.completed
+                  };
+                }
+                return item
+              })
+            }
+
+            case types.CLEAR_COMPLETED :
+              return {
+                ...state,
+                myList: state.myList.filter(item => 
+                  !item.completed)
+              }
+
+
             default: 
             return state
     

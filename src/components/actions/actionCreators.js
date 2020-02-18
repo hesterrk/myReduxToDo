@@ -22,3 +22,17 @@ export const toDoAction = ({ item }) => {
         }
     }
 }
+
+export const markCompleted = (id) => {
+    return {
+    type: types.MARK_COMPLETED,
+    payload: id
+    }
+}
+
+export const clearCompleted = (id) => {
+    return {
+        type: types.CLEAR_COMPLETED,
+        payload: id
+    }
+}

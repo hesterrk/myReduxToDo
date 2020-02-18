@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { formAction, toDoAction } from './actions/actionCreators';
+import React from 'react';
+import { formAction, toDoAction, markCompleted, clearCompleted } from './actions/actionCreators';
 
 import { connect } from 'react-redux'
 
 
 function ToDoForm(props) {
 
-    // const [newText, setNewText] = useState('')
 
 
 const onSubmit = e => {
@@ -28,6 +27,18 @@ const onChange = e => {
     })
 }
 
+const onMarkCompleted = id => {
+    props.markCompleted(id)
+}
+
+const onClearCompleted = id => {
+    props.clearCompleted(id)
+}
+
+
+
+
+
     return (
 
 <div>
@@ -35,8 +46,13 @@ const onChange = e => {
 {props.todoProps.map(items=> (
     <div>
     {items.item}
+
+    
     <br>
     </br>
+    <button onClick={() => onMarkCompleted(items.id)}>Completed?</button>
+
+    <button onClick={() => onClearCompleted(items.id)}>Clear Completed</button>
 
    </div>
    
@@ -77,5 +93,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { toDoAction, formAction }
+    { toDoAction, formAction, markCompleted, clearCompleted }
     )(ToDoForm);
